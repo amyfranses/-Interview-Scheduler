@@ -25,6 +25,19 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer,
+    };
+
+    transition(SAVING);
+
+    Promise.resolve(props.bookInterview(props.id, interview))
+      .then(() => transition(SHOW))
+      .catch((err) => console.log(err));
+  }
+
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -42,9 +55,10 @@ export default function Appointment(props) {
           // interviewers={props.interviewers}
           interviewers={props.interviewers}
           onCancel={back}
+          onSave={save}
         />
       )}
-      :
+      {mode === SAVING && <Status message="Saving" />}
     </article>
   );
 }
