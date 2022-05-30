@@ -40,7 +40,7 @@ export default function Appointment(props) {
           name={props.name}
           value={props.value}
           // interviewers={props.interviewers}
-          interviewers={[]}
+          interviewers={props.interviewers}
           onCancel={back}
         />
       )}
