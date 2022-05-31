@@ -38,27 +38,53 @@ export default function Appointment(props) {
       .catch((err) => console.log(err));
   }
 
+  function deleteAppointment() {
+    transition(DELETING);
+    Promise.resolve(props.cancelInterview(props.id))
+      .then(() => transition(EMPTY))
+      .catch((err) => console.log(err));
+  }
+
   return (
     <article className="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
         <Show
+          id={props.id}
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete={() => transition(CONFIRM)}
+          onEdit={() => transition(EDIT)}
         />
       )}
       {mode === CREATE && (
         <Form
           name={props.name}
           value={props.value}
-          // interviewers={props.interviewers}
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
         />
       )}
       {mode === SAVING && <Status message="Saving" />}
+      {mode === DELETING && <Status message="Deleting" />}
+      {mode === CONFIRM && (
+        <Confirm
+          message="Are you sure?"
+          onCancel={back}
+          onConfirm={deleteAppointment}
+        />
+      )}
+      {mode === EDIT && (
+        <Form
+          name={props.interview.student}
+          interviewer={props.interview.interviewer.id}
+          interviewers={props.interviewers}
+          onCancel={back}
+          onSave={save}
+        />
+      )}
     </article>
   );
 }
