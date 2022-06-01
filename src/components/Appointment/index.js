@@ -35,14 +35,14 @@ export default function Appointment(props) {
 
     Promise.resolve(props.bookInterview(props.id, interview))
       .then(() => transition(SHOW))
-      .catch((err) => console.log(err));
+      .catch((error) => transition(ERROR_SAVE, true));
   }
 
   function deleteAppointment() {
-    transition(DELETING);
+    transition(DELETING, true);
     Promise.resolve(props.cancelInterview(props.id))
       .then(() => transition(EMPTY))
-      .catch((err) => console.log(err));
+      .catch((error) => transition(ERROR_DELETE, true));
   }
 
   return (
@@ -60,7 +60,6 @@ export default function Appointment(props) {
       )}
       {mode === CREATE && (
         <Form
-          name={props.name}
           value={props.value}
           interviewers={props.interviewers}
           onCancel={back}
@@ -78,12 +77,16 @@ export default function Appointment(props) {
       )}
       {mode === EDIT && (
         <Form
-          name={props.interview.student}
+          student={props.interview.student}
           interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
         />
+      )}
+      {mode === ERROR_SAVE && <Error message="Unable to save" onClose={back} />}
+      {mode === ERROR_DELETE && (
+        <Error message="Unable to delete" onClose={back} />
       )}
     </article>
   );
