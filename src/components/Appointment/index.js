@@ -42,7 +42,10 @@ export default function Appointment(props) {
     transition(DELETING, true);
     Promise.resolve(props.cancelInterview(props.id))
       .then(() => transition(EMPTY))
-      .catch((error) => transition(ERROR_DELETE, true));
+      .catch((error) => {
+        console.log(error);
+        transition(ERROR_DELETE, true);
+      });
   }
 
   return (
