@@ -47,6 +47,9 @@ export default function Appointment(props) {
         transition(ERROR_DELETE, true);
       });
   }
+  // eg of object destructuring to pass props more concisely. Left longer version for future understanding of code
+  // const { interview, interviewers } = props;
+  // const { student, interviewer } = interview;
 
   return (
     <article className="appointment">
