@@ -42,10 +42,7 @@ export default function Appointment(props) {
     transition(DELETING, true);
     Promise.resolve(props.cancelInterview(props.id))
       .then(() => transition(EMPTY))
-      .catch((error) => {
-        console.log(error);
-        transition(ERROR_DELETE, true);
-      });
+      .catch((error) => transition(ERROR_DELETE, true));
   }
   // eg of object destructuring to pass props more concisely. Left longer version for future understanding of code
   // const { interview, interviewers } = props;
