@@ -6,13 +6,23 @@ The app allows the users to book, edit or cancel technical interviews between st
 
 # Screenshots
 
+### View of Monday with no interviews scheduled.
+
 ![Getting Started](/docs/Screen-Shot-01.png)
+
+### View of interview booking form before save.
 
 ![Getting Started](/docs/Screen-Shot-02.png)
 
+### View of interview booking form before save.
+
 ![Getting Started](/docs/Screen-Shot-03.png)
 
+### View of saved appointment, with edit and delete buttons. Number of remaining spots available for Monday has been updated.
+
 ![Getting Started](/docs/Screen-Shot-04.png)
+
+### View of Friday.
 
 ![Getting Started](/docs/Screen-Shot-05.png)
 
